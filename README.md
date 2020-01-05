@@ -27,11 +27,11 @@ https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_y
 1. Tree traversal
 
     ```swift
-    print(tree.nextValue(key: "a")) // => nil
-    print(tree.nextValue(key: "p")) // => nil
-    print(tree.nextValue(key: "p")) // => nil
-    print(tree.nextValue(key: "l")) // => nil
-    print(tree.nextValue(key: "e")) // => "🍎"
+    print(tree.nextState(key: "a")).value // => nil
+    print(tree.nextState(key: "p")).value // => nil
+    print(tree.nextState(key: "p")).value // => nil
+    print(tree.nextState(key: "l")).value // => nil
+    print(tree.nextState(key: "e")).value // => "🍎"
     ```
 
 ## Visualize
