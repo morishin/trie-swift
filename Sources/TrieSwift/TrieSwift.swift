@@ -4,6 +4,19 @@ public class TrieTree<Key: Hashable, Value: Any> {
     private typealias Node = TrieNode<Key, Value>
     private let rootNode: Node
     private var currentNode: Node
+    private var currentKeys: [Key] = []
+
+    public enum State {
+        case none
+        case accept(keys: [Key], value: Value)
+
+        var value: Value? {
+            if case let .accept(_, value) = self {
+                return value
+            }
+            return nil
+        }
+    }
 
     public init() {
         let rootNode: Node = .init()
@@ -54,13 +67,22 @@ public class TrieTree<Key: Hashable, Value: Any> {
         }
     }
 
-    public func nextValue(key: Key) -> Value? {
+    public func nextState(key: Key) -> State {
         if let nextNode = currentNode.child(for: key) {
-            currentNode = nextNode.value == nil ? nextNode : rootNode
-            return nextNode.value
+            if let value = nextNode.value {
+                currentNode = rootNode
+                let state = State.accept(keys: currentKeys, value: value)
+                currentKeys = []
+                return state
+            } else {
+                currentNode = nextNode
+                currentKeys.append(key)
+                return .none
+            }
         } else {
             currentNode = rootNode
-            return nil
+            currentKeys = []
+            return .none
         }
     }
 }
