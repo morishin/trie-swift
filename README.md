@@ -4,6 +4,10 @@
 
 Trie tree implementation in Swift.
 
+## Installation
+
+https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
+
 ## Example
 
 1. Make tree
